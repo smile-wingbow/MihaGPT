@@ -42,8 +42,8 @@ wget https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodrive
 tar -xvzf geckodriver-v0.35.0-linux-aarch64.tar.gz  
 sudo mv geckodriver /usr/local/bin/
 #### 四.配置参数：
-1.修改metaGPT的LLM配置，配置config目录的config2.yaml、gpt4o.yaml、gpt4omini.yaml配置，代码中主要用到了gpt4o和gpt4omini两种模型，分别用于不同的智能体。
-2.修改miha_config.yaml，说明如下：
+##### 1.修改metaGPT的LLM配置，配置config目录的config2.yaml、gpt4o.yaml、gpt4omini.yaml配置，代码中主要用到了gpt4o和gpt4omini两种模型，分别用于不同的智能体。
+##### 2.修改miha_config.yaml，说明如下：
 ##### 配置项说明
 | 参数                  | 说明                                                                                                       | 默认值                                                                                                    | 可选值                                                           |
 | --------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
