@@ -4,8 +4,8 @@
 ## ✨ 软件
 
 - Homeassistan，需要安装Xiaomi Miot Auto插件。如果要使用本项目生成HA的自动化，则需要把HA安装到本项目相同的主机上，并使用以下参数启动HA：docker run -d  --name ha  -p 8123:8123  --privileged   --restart=unless-stopped   -e TZ=Asia/Shanghai   -v /data/homeassistant:/config   ghcr.io/home-assistant/home-assistant:stable
-- ****[xiaogpt](https://github.com/yihong0618/xiaogpt)**，增加了同时唤醒多个音箱的支持，并支持更多的音箱型号。
-- ****[MetaGPT](https://github.com/geekan/MetaGPT)**，主要是智能体流程。
+- [xiaogpt](https://github.com/yihong0618/xiaogpt)，增加了同时唤醒多个音箱的支持，并支持更多的音箱型号。
+- [MetaGPT](https://github.com/geekan/MetaGPT)，主要是智能体流程。
 ## 获取小米音响DID
 
 | 系统和Shell   | Linux *sh                                      | Windows CMD用户                          | Windows PowerShell用户                           |
