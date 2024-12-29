@@ -94,7 +94,7 @@ python3.9 mihagpt.py --config miha_config.yaml
 ## 联系
 加群一起讨论
 
-![](https://github.com/smile-wingbow/MihaGPT/main/assets/wechat.jpg?raw=true)
+![](https://github.com/smile-wingbow/MihaGPT/blob/main/assets/weichat.jpg)
 
 ## ❤️ 鸣谢
 
