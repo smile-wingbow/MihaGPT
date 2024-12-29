@@ -84,11 +84,8 @@ sudo mv geckodriver /usr/local/bin/
 | volc_access_key       | 火山引擎的 access key 请在[这里](https://console.volcengine.com/iam/keymanage/)获取                        |                                                                                                           |                                                                  |
 | volc_secret_key       | 火山引擎的 secret key 请在[这里](https://console.volcengine.com/iam/keymanage/)获取                        |                                                                                                           |
 | debug_mode       | 在本机上调试模式                        |                                                                                                           |
-|
 | ha_address       | homeassistant地址                        |                                                                                                           |
-|
 | ha_token       | homeassistant api的token                        |                                                                                                           |
-|
 #### 五.启动服务：
 使用以下命令启动
 ```shell
