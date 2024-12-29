@@ -1,0 +1,254 @@
+{
+    "env": {
+        "desc": "",
+        "roles": {
+            "Judger": {
+                "name": "Judger",
+                "profile": "Judger",
+                "goal": "",
+                "constraints": "",
+                "desc": "",
+                "is_human": false,
+                "is_interact_bot": false,
+                "role_id": "",
+                "states": [
+                    "0. Evaluate"
+                ],
+                "actions": [
+                    {
+                        "name": "Evaluate",
+                        "i_context": "",
+                        "prefix": "You are a Judger, named Judger, your goal is . ",
+                        "desc": "",
+                        "EVALUATE_PROMPT_TEMPLATE": "\n    ## context\n    <<<\n    {context}\n    >>>，    \n    上述对话中涉及的角色包括：\n        1.Human，用户。\n        2.Doorman，用户对话分类器，分析用户对话\n        2.Interpreter，根据对话的分析结果，选择下一步的动作。\n        3.Actuator，根据调度器的结果，执行对应的动作，包括读取设备实体数据历史、调用home assistant设备实体服务、向用户确认、读取设备实体状态、播放提示语音等。\n\n    ## Role:\n    home assistant资深专家\n\n    ## Profile:\n    - Language:中文\n    - Description: 你是一个home assistant专家，通过与用户的对话给出建议，帮助他们访问和控制home assistant设备。\n\n    ## Constraints:\n    - 现在的时间是：{time}\n\n    ## Skill:  \n\n    ## Workflow:\n    think step by step，分析context，根据分析结果选择以下选项之一，并按照选项中的要求根据OutputFormat输出相关内容：\n    分支1. 如果下一步需要先读取home assistant中的设备或设备的状态，则输出\"next_step\"为2，并输出其他内容，结束。\n    分支2. 如果下一步需要先控制home  assistant中的设备，则输出\"next_step\"为3，并输出其他内容，结束。\n    分支3. 如果下一步需要先新增或修改home assistant的自动化场景，则输出\"next_step\"为4。\n    分支4. 如果你觉得自动化场景生成存在问题，请选择此项，输出\"next_step\"为4，并输出\"result\"。\n    分支5. 如果你认为已经完全满足了用户的需求/意图或潜在意图，请选择此项，输出\"next_step\"为5，并输出\"result\"来告诉用户结果，并询问用户有什么新的需求。\n    分支6. 如果你认为已经完全满足了用户的需求/意图或潜在意图，且用户答复没有其他新的需求，请选择此项。输出\"next_step\"为6，并输出\"result\"来告诉用户结果。\n    分支9. 如果你觉得多次交互后还是无法回答用户的问题，请选择此项，输出\"next_step\"为9，并输出\"result\"对用户表示歉意。\n    分支10.如果下一步需要先初始化home assistant的自动化场景，则输出\"next_step\"为10。\n    Please note that \"next_step\" only needs a number, no need to add any other text.\n\n\n    ## OutputFormat:\n    分析结果以json结构输出，json格式如下：\n       ```json \n       {{\n            \"next_step\": 4,\n            \"question\": \"需要确认的内容\",\n            \"result\": \"结果说明\"\n        }}\n       ```   \n    ",
+                        "__module_class_name": "xiaogpt.agents.ha_agent.Evaluate"
+                    }
+                ],
+                "rc": {
+                    "memory": {
+                        "storage": [
+                            {
+                                "id": "605caf27345c48fa95c0cf70350e2fe4",
+                                "content": "{\"user\": \"告诉我\", \"current_area\": \"地下室\"}",
+                                "instruct_content": null,
+                                "role": "Human",
+                                "cause_by": "metagpt.actions.add_requirement.UserRequirement",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            },
+                            {
+                                "id": "5e38ff12abe74958b3d018696521098d",
+                                "content": "\n{\"next_step\":2,\"requirement analysis\":\"用户希望获取关于地下室的某些信息，但没有具体说明是关于设备状态、控制设备还是其他需求。需要进一步确认用户的具体需求。\",\"area_ids\":[\"di_xia_shi\"],\"entity type\":[],\"tips\":\"请告诉我您想了解地下室的哪些设备状态或控制哪些设备。\"}\n",
+                                "instruct_content": null,
+                                "role": "Doorman",
+                                "cause_by": "xiaogpt.agents.ha_agent.Classify_L1",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            },
+                            {
+                                "id": "951e8b1ce348450f82bbb434503c0cf5",
+                                "content": "\n{\n    \"next_step\": 4,\n    \"question\": \"请告诉我您想了解地下室的哪些设备状态或控制哪些设备。\",\n    \"result\": \"\"\n}\n",
+                                "instruct_content": null,
+                                "role": "Interpreter",
+                                "cause_by": "xiaogpt.agents.ha_agent.Classify_L2_R",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            },
+                            {
+                                "id": "dfba2976154d4546b4a9c6e8efddc0db",
+                                "content": "\"\"",
+                                "instruct_content": null,
+                                "role": "Human",
+                                "cause_by": "xiaogpt.agents.ha_agent.AskUserToConfirm",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            },
+                            {
+                                "id": "37d31bc54e714c5e9c5a35173a989503",
+                                "content": "{\"user\": \"告诉我上海路靠近什么路\", \"current_area\": \"地下室\"}",
+                                "instruct_content": null,
+                                "role": "Human",
+                                "cause_by": "metagpt.actions.add_requirement.UserRequirement",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            },
+                            {
+                                "id": "9b941355cea643ddbd2d75b3ebbcfc17",
+                                "content": "\n{\"next_step\":0,\"requirement analysis\":\"用户询问的是地理位置相关的问题，而不是与智能家居设备相关的需求，因此需要联网搜索以获取准确答案。\",\"area_ids\":[],\"entity type\":[],\"tips\":\"请稍等，我将为您查找相关信息。\"}\n",
+                                "instruct_content": null,
+                                "role": "Doorman",
+                                "cause_by": "xiaogpt.agents.ha_agent.Classify_L1",
+                                "sent_from": "",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            }
+                        ],
+                        "index": {
+                            "metagpt.actions.add_requirement.UserRequirement": [
+                                {
+                                    "id": "605caf27345c48fa95c0cf70350e2fe4",
+                                    "content": "{\"user\": \"告诉我\", \"current_area\": \"地下室\"}",
+                                    "instruct_content": null,
+                                    "role": "Human",
+                                    "cause_by": "metagpt.actions.add_requirement.UserRequirement",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                },
+                                {
+                                    "id": "37d31bc54e714c5e9c5a35173a989503",
+                                    "content": "{\"user\": \"告诉我上海路靠近什么路\", \"current_area\": \"地下室\"}",
+                                    "instruct_content": null,
+                                    "role": "Human",
+                                    "cause_by": "metagpt.actions.add_requirement.UserRequirement",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                }
+                            ],
+                            "xiaogpt.agents.ha_agent.Classify_L1": [
+                                {
+                                    "id": "5e38ff12abe74958b3d018696521098d",
+                                    "content": "\n{\"next_step\":2,\"requirement analysis\":\"用户希望获取关于地下室的某些信息，但没有具体说明是关于设备状态、控制设备还是其他需求。需要进一步确认用户的具体需求。\",\"area_ids\":[\"di_xia_shi\"],\"entity type\":[],\"tips\":\"请告诉我您想了解地下室的哪些设备状态或控制哪些设备。\"}\n",
+                                    "instruct_content": null,
+                                    "role": "Doorman",
+                                    "cause_by": "xiaogpt.agents.ha_agent.Classify_L1",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                },
+                                {
+                                    "id": "9b941355cea643ddbd2d75b3ebbcfc17",
+                                    "content": "\n{\"next_step\":0,\"requirement analysis\":\"用户询问的是地理位置相关的问题，而不是与智能家居设备相关的需求，因此需要联网搜索以获取准确答案。\",\"area_ids\":[],\"entity type\":[],\"tips\":\"请稍等，我将为您查找相关信息。\"}\n",
+                                    "instruct_content": null,
+                                    "role": "Doorman",
+                                    "cause_by": "xiaogpt.agents.ha_agent.Classify_L1",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                }
+                            ],
+                            "xiaogpt.agents.ha_agent.Classify_L2_R": [
+                                {
+                                    "id": "951e8b1ce348450f82bbb434503c0cf5",
+                                    "content": "\n{\n    \"next_step\": 4,\n    \"question\": \"请告诉我您想了解地下室的哪些设备状态或控制哪些设备。\",\n    \"result\": \"\"\n}\n",
+                                    "instruct_content": null,
+                                    "role": "Interpreter",
+                                    "cause_by": "xiaogpt.agents.ha_agent.Classify_L2_R",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                }
+                            ],
+                            "xiaogpt.agents.ha_agent.AskUserToConfirm": [
+                                {
+                                    "id": "dfba2976154d4546b4a9c6e8efddc0db",
+                                    "content": "\"\"",
+                                    "instruct_content": null,
+                                    "role": "Human",
+                                    "cause_by": "xiaogpt.agents.ha_agent.AskUserToConfirm",
+                                    "sent_from": "",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                }
+                            ]
+                        },
+                        "ignore_id": false
+                    },
+                    "working_memory": {
+                        "storage": [],
+                        "index": {},
+                        "ignore_id": false
+                    },
+                    "state": -1,
+                    "watch": [
+                        "xiaogpt.agents.ha_agent.Read_ha_history_response",
+                        "xiaogpt.agents.ha_agent.Gen_ha_automation",
+                        "xiaogpt.agents.ha_agent.Read_ha_state_response",
+                        "xiaogpt.agents.ha_agent.Call_ha_service_response",
+                        "xiaogpt.agents.ha_agent.SearchWeb"
+                    ],
+                    "react_mode": "by_order",
+                    "max_react_loop": 1
+                },
+                "addresses": [
+                    "xiaogpt.agents.ha_agent.Judger",
+                    "Judger"
+                ],
+                "planner": {
+                    "plan": {
+                        "goal": "",
+                        "context": "",
+                        "tasks": [],
+                        "task_map": {},
+                        "current_task_id": ""
+                    },
+                    "working_memory": {
+                        "storage": [],
+                        "index": {},
+                        "ignore_id": false
+                    },
+                    "auto_run": false
+                },
+                "recovered": false,
+                "latest_observed_msg": null,
+                "__module_class_name": "xiaogpt.agents.ha_agent.Judger"
+            },
+            "Actuator": {
+                "name": "Actuator",
+                "profile": "Actuator",
+                "goal": "",
+                "constraints": "",
+                "desc": "",
+                "is_human": false,
+                "is_interact_bot": false,
+                "role_id": "",
+                "states": [
+                    "0. Read_ha_state_response",
+                    "1. Call_ha_service_response",
+                    "2. AskUserToConfirm",
+                    "3. Read_ha_history_response",
+                    "4. Gen_ha_automation",
+                    "5. AskNewRequirement",
+                    "6. SearchWeb",
+                    "7. Gossip"
+                ],
+                "actions": [
+                    {
+                        "name": "Read_ha_state_response",
+                        "i_context": "",
+                        "prefix": "You are a Actuator, named Actuator, your goal is . ",
+                        "desc": "",
+                        "__module_class_name": "xiaogpt.agents.ha_agent.Read_ha_state_response"
+                    },
+                    {
+                        "name": "Call_ha_service_response",
+                        "i_context": "",
+                        "prefix": "You are a Actuator, named Actuator, your goal is . ",
+                        "desc": "",
+                        "CALL_HA_SERVICE_RESPONSE_TEMPLATE": "\n    ## context\n    <<<\n    {context}\n    >>>，\n    你是一个home assistant专家，你通过home assistant的API调用home assistant中设备实体的服务，\n\n    待调用的home assistant设备实体id和服务列表如下：\n    ---\n    {entities_services}\n    ---，\n\n    调用的结果如下：$$${results}$$$，\n\n    以json结构输出你对调用服务结果的说明，在\"result\"中详细说明home assistant服务调用的结果，json格式如下：\n    ```json \n    {{\"call entity service\":[{{\"entity_id\":\"climate.xiaomi_mc5_1642_air_conditioner\",\"service\":\"set_hvac_mode\",\"option_name\":\"hvac_mode/NA\",\"option\":\"cool/NA\"}}...],\"result\":\"content\"}}\n    ```\n    ",
+                        "__module_class_name": "xiaogpt.agents.ha_agent.Call_ha_service_response"
+                    },
+                    {
+                        "name": "AskUserToConfirm",
+                        "i_context": "",
+                        "prefix": "You are a Actuator, named Actuator, your goal is . ",
+                        "desc": "",
+                        "tts_callback": 
